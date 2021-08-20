@@ -8,6 +8,6 @@ module.exports = {
   async execute(interaction) {
     const activity = interaction.options.getString('activity');
     interaction.client.user.setActivity(activity, { type: 'PLAYING' });
-    await interaction.reply({ content: 'Game has been set!', ephemeral: true });
+    await interaction.reply({ content: 'Activity has been set!', ephemeral: true });
   },
 };
