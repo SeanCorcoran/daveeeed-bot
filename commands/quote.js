@@ -1,4 +1,4 @@
-const { SlashCommandBuilder } = require('@discordjs/builders');
+const { SlashCommandBuilder, quote, italic } = require('@discordjs/builders');
 const fetch = require('node-fetch');
 
 module.exports = {
@@ -9,10 +9,10 @@ module.exports = {
     await interaction.deferReply();
     fetch('https://animechan.vercel.app/api/random')
       .then(response => response.json())
-      .then(async quote => { 
-        content = `> ${quote.quote}
+      .then(async quoteRes => { 
+        content = `${quote(quoteRes.quote)}
         
-_${quote.character} from ${quote.anime}_`
+${italic(quoteRes.character)} from ${italic(quoteRes.anime)}`
 
         await interaction.editReply({ content: content })
       });
