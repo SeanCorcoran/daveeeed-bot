@@ -6,6 +6,7 @@ module.exports = {
     .setName('quote')
     .setDescription('Daveeeed will share one of his favorite anime quotes!'),
   async execute(interaction) {
+    await interaction.deferReply();
     fetch('https://animechan.vercel.app/api/random')
       .then(response => response.json())
       .then(async quote => { 
@@ -13,7 +14,7 @@ module.exports = {
         
 _${quote.character} from ${quote.anime}_`
 
-        await interaction.reply({ content: content })
+        await interaction.editReply({ content: content })
       });
   },
 };
