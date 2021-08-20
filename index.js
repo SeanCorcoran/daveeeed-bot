@@ -1,5 +1,6 @@
 require('dotenv').config()
 const fs = require('fs')
+const path = require('path')
 const { Client, Collection, Intents } = require('discord.js');
 
 // create a new Discord client
@@ -7,9 +8,9 @@ const client = new Client({ intents: [Intents.FLAGS.GUILDS] });
 
 // Register commands
 client.commands = new Collection();
-const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
+const commandFiles = fs.readdirSync(path.resolve(__dirname, 'commands')).filter(file => file.endsWith('.js'));
 for (const file of commandFiles) {
-  const command = require(`./commands/${file}`);
+  const command = require(path.resolve(__dirname, `commands/${file}`));
   client.commands.set(command.data.name, command);
 }
 
